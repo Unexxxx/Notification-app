@@ -1,14 +1,12 @@
 package com.kentonyx.notificationapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
 import android.view.MenuItem
-import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
@@ -25,10 +23,16 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-        val imageView: ImageView = toolbar.findViewById(R.id.ivMenu)
+        val imageNavMenu: ImageView = toolbar.findViewById(R.id.ivMenu)
+        val ivAddReminder: ImageView = findViewById(R.id.ivAddReminder)
 
-        imageView.setOnClickListener{
+        imageNavMenu.setOnClickListener{
             drawer.openDrawer(GravityCompat.START)
+        }
+
+        ivAddReminder.setOnClickListener{
+            val intent = Intent(this@MainActivity,ReminderActivity::class.java)
+            startActivity(intent)
         }
 
         drawer = findViewById(R.id.drawerLayout)
