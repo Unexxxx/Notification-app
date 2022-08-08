@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/settings"
-        android:title="Settings"/>
+        <item
+            android:id="@+id/settings"
+            android:title="Settings"/>
 
-    <item
-        android:id="@+id/termsAndConditions"
-        android:title="Terms &amp; Conditons"/>
+        <item
+            android:id="@+id/termsAndConditions"
+            android:title="Terms &amp; Conditons"/>
 
-    <item
-        android:id="@+id/dataPolicy"
-        android:title="Data Policy"/>
+        <item
+            android:id="@+id/dataPolicy"
+            android:title="Data Policy"/>
 
-    <item
-        android:id="@+id/logOut"
-        android:title="Log out"/>
+        <item
+            android:id="@+id/logOut"
+            android:title="Log out"
+            android:enabled="false"/>
+
 
 </menu>

@@ -2,43 +2,52 @@ package com.kentonyx.notificationapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.MenuItem
+import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
-import com.kentonyx.notificationapp.databinding.ActivityMainBinding
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMainBinding
-    lateinit var toggle: ActionBarDrawerToggle
+class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
+
+    lateinit var drawer: DrawerLayout
+    lateinit var navigationView: NavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        binding.apply {
-            toggle = ActionBarDrawerToggle(this@MainActivity,dlActionbar,R.string.open,R.string.close)
-            dlActionbar.addDrawerListener(toggle)
-            toggle.syncState()
+        setContentView(R.layout.activity_main)
 
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        val imageView: ImageView = toolbar.findViewById(R.id.ivMenu)
 
-            nvMenu.setNavigationItemSelectedListener {
-                when(it.itemId){
-                    R.id.settings->{Toast.makeText(this@MainActivity,"Settings",Toast.LENGTH_SHORT).show()}
-                    R.id.termsAndConditions->{Toast.makeText(this@MainActivity,"Terms and Conditions",Toast.LENGTH_SHORT).show()}
-                    R.id.dataPolicy->{Toast.makeText(this@MainActivity,"Data Policy",Toast.LENGTH_SHORT).show()}
-                    R.id.logOut->{Toast.makeText(this@MainActivity,"Log out",Toast.LENGTH_SHORT).show()}
-                }
-                true
+        imageView.setOnClickListener{
+            drawer.openDrawer(GravityCompat.START)
+        }
+
+        drawer = findViewById(R.id.drawerLayout)
+        navigationView = findViewById(R.id.nvMenu)
+        navigationView.setNavigationItemSelectedListener(this)
+
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.settings -> {
+                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(toggle.onOptionsItemSelected(item)){
-            true
-        }
-        return super.onOptionsItemSelected(item)
+        drawer.closeDrawers()
+        return true
     }
 }
+
+
+
+
